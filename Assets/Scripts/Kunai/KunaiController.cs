@@ -92,14 +92,18 @@ public class KunaiController : MonoBehaviour, ISubject
             _capsuleCollider.material = null;
             Finish();
         }
-        if (collision.transform.CompareTag("Border"))
+        else if (collision.transform.CompareTag("Border"))
         {
             Respawn();
         }
-        if (collision.transform.CompareTag("Wood"))
+        else if (collision.transform.CompareTag("Wood"))
         {
             _capsuleCollider.material = null;
             Stuck();
+        }
+        else
+        {
+            //transform.position = collision.contacts[0].point;
         }
 
         NotifyObservers(_observersImpact);
@@ -133,7 +137,7 @@ public class KunaiController : MonoBehaviour, ISubject
         GameManager.Instance?.FinishLevel();
     }
 
-    private void Stop()
+    internal void Stop()
     {
         _trailRenderer.enabled = false;
 
@@ -188,7 +192,11 @@ public class KunaiController : MonoBehaviour, ISubject
                     _lineRenderer.SetPosition(2, hit.point + Vector3.Reflect(transform.up, hit.normal) * (10 - hit.distance));
                 }
             }
-            if ((_woodLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+            else if ((_woodLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+            {
+                _lineRenderer.SetPosition(2, hit.point);
+            }
+            else
             {
                 _lineRenderer.SetPosition(2, hit.point);
             }
@@ -248,7 +256,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
     internal void Respawn()
     {
-        if (GameManager.Instance != null && GameManager.Instance.CheckAllBallonAreDestroy()) 
+        if (GameManager.Instance != null && GameManager.Instance.CheckAllBallonAreDestroy())
             return;
 
         if (_currentKunaiCount == 0)

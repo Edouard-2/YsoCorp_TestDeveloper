@@ -29,13 +29,14 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        _balloonsDestroy.eventHandle += AddBalloonExplosed;
+        if (_balloonsDestroy != null)
+            _balloonsDestroy.eventHandle += AddBalloonExplosed;
     }
 
     private void OnDestroy()
     {
-
-        _balloonsDestroy.eventHandle -= AddBalloonExplosed;
+        if(_balloonsDestroy != null)
+            _balloonsDestroy.eventHandle -= AddBalloonExplosed;
     }
 
     internal void StartLevel()
@@ -50,8 +51,12 @@ public class GameManager : MonoBehaviour
     
     internal void RestartLevel()
     {
-        _kunai.ResetCount();
+        _balloonsDestroyCount = 0;
+
         ResetBalloons();
+
+        _kunai.Stop();
+        _kunai.ResetCount();
         _kunai.Respawn();
     }
     
@@ -60,7 +65,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _listPositionsBallon.Count; i++)
         {
             if (_listBalloons[i]._hasExplosed)
-                Instantiate(_ballonPrefab, _listPositionsBallon[i], Quaternion.identity);
+                _listBalloons[i].Respawn();
+            
         }
     }
 

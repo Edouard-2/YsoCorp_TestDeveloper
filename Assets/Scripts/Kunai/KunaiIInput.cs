@@ -28,6 +28,8 @@ public class KunaiInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (eventData.pointerCurrentRaycast.gameObject != gameObject) return;
+
         UpdateEndPosition(eventData.position);
         if (!_canPlay) return;
 
@@ -36,19 +38,22 @@ public class KunaiInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerMove(PointerEventData eventData)
     {
-        if (!_canPlay) return;
+        if(eventData.pointerCurrentRaycast.gameObject != gameObject )return;
 
+        if (!_canPlay) return;
         UpdateKunaiRotation(eventData.position);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (eventData.pointerCurrentRaycast.gameObject != gameObject) return;
+
         if (!_canPlay)
         {
             _endPosition = _startPosition; 
             return;
         }
-        
+
         _canPlay = false;
 
         UpdateKunaiRotation(eventData.position);

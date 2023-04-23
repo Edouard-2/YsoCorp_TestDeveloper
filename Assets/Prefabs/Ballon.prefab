@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce26bd776df2e92488f12f9805a132f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 5746441203492255520}
   _vfxExplosion: {fileID: 8866016865380549749}
+  _meshAnimator: {fileID: 1330456418742217805}
   _balloonsExplosed: {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
 --- !u!1 &2098502340577794512
 GameObject:

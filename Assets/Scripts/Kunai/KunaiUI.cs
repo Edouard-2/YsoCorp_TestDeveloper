@@ -28,8 +28,6 @@ public class KunaiUI : MonoBehaviour
 
     private void UpdateKunaiUI(ISubject subject)
     {
-        Debug.Log("Update Kunai UI");
-
         if (subject is not KunaiController kunaiController) return;
 
         for (int i = 0; i < 3; i++)

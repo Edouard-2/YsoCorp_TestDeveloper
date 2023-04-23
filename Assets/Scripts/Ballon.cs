@@ -4,14 +4,17 @@ public class Ballon : MonoBehaviour, ISubject
 {
     [Header("Components")]
     [SerializeField]
-    private GameObject _mesh;
-    [SerializeField]
     private ParticleSystem _vfxExplosion;
+    [SerializeField]
+    private Animator _meshAnimator;
 
     [Header("Events")]
     [SerializeField]
     private EventObserver _balloonsExplosed;
-    
+        
+    internal int _hashExplosion = Animator.StringToHash("Explosion");
+    internal int _hashRespawn = Animator.StringToHash("Respawn");
+
     internal bool _hasExplosed;
 
     private void Start()
@@ -25,10 +28,15 @@ public class Ballon : MonoBehaviour, ISubject
         _hasExplosed = true;
 
         _vfxExplosion.Play();
-        _mesh.SetActive(false);
+
+        _meshAnimator.Play(_hashExplosion);
 
         _balloonsExplosed.Raise(this);
+    }
 
-        Destroy(gameObject, 5);
+    internal void Respawn()
+    {
+        _hasExplosed = false;
+        _meshAnimator.Play(_hashRespawn);
     }
 }
