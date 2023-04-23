@@ -257,7 +257,7 @@ Transform:
   - {fileID: 146834608}
   - {fileID: 8703991140281930319}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7345087369527259145
 CapsuleCollider:
@@ -269,7 +269,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 1919
@@ -361,6 +361,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 705
   _observersFinishLevel: []
+  _observersLaunchKunai: []
+  _observersResetKunai: []
   _observersImpact:
   - {fileID: 11400000, guid: 5b17dcda6b2d28542b5880355e93eac6, type: 2}
 --- !u!95 &1243695869

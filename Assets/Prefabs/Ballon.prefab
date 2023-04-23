@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 5746441203492255520}
   _vfxExplosion: {fileID: 8866016865380549749}
+  _balloonsExplosed: {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
 --- !u!1 &2098502340577794512
 GameObject:
   m_ObjectHideFlags: 0
@@ -4909,7 +4910,7 @@ GameObject:
   - component: {fileID: 5628199346742422822}
   - component: {fileID: 3967452823248151396}
   - component: {fileID: 1537454272071941842}
-  - component: {fileID: 4142278028569422524}
+  - component: {fileID: 1330456418742217805}
   m_Layer: 0
   m_Name: Ballon
   m_TagString: Untagged
@@ -4926,7 +4927,7 @@ Transform:
   m_GameObject: {fileID: 5746441203492255520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1739183506341401195}
@@ -4982,7 +4983,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &4142278028569422524
+--- !u!95 &1330456418742217805
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -4992,7 +4993,7 @@ Animator:
   m_GameObject: {fileID: 5746441203492255520}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eabc5d9b195b1a6438a25ee0707bcac4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 85f43243c8f1d6c42ab18f05efe8282f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -36,6 +36,10 @@ public class KunaiController : MonoBehaviour, ISubject
     [SerializeReference]
     private List<EventObserver> _observersFinishLevel;
     [SerializeReference]
+    private List<EventObserver> _observersLaunchKunai;
+    [SerializeReference]
+    private List<EventObserver> _observersResetKunai;
+    [SerializeReference]
     private List<EventObserver> _observersImpact;
 
     // ------- Private ------ //
@@ -45,6 +49,8 @@ public class KunaiController : MonoBehaviour, ISubject
     private int _hashStuck = Animator.StringToHash("Stuck");
     private int _hashRespawn = Animator.StringToHash("Spawn");
     private int _hashFinish = Animator.StringToHash("Finish");
+
+    internal int _currentKunaiCount = 3;
 
     private Animator _animator;
     private Rigidbody _rb;
@@ -205,7 +211,11 @@ public class KunaiController : MonoBehaviour, ISubject
         _trailRenderer.enabled = true;
         _trailRenderer.Clear();
 
+        _currentKunaiCount--;
+
         HideLineRenderer();
+
+        NotifyObservers(_observersLaunchKunai);
 
         CheckIfWoodIsInFront(transform.up);
     }
@@ -236,8 +246,17 @@ public class KunaiController : MonoBehaviour, ISubject
         }
     }
 
-    private void Respawn()
+    internal void Respawn()
     {
+        if (GameManager.Instance != null && GameManager.Instance.CheckAllBallonAreDestroy()) 
+            return;
+
+        if (_currentKunaiCount == 0)
+        {
+            GameManager.Instance.RestartLevel();
+            return;
+        }
+
         transform.position = _startPosition;
         transform.rotation = _startRotation;
 
@@ -251,6 +270,12 @@ public class KunaiController : MonoBehaviour, ISubject
         ShowLineRenderer();
 
         _animator.Play(_hashRespawn);
+    }
+
+    internal void ResetCount()
+    {
+        _currentKunaiCount = 3;
+        NotifyObservers(_observersResetKunai);
     }
 
     private void HideLineRenderer()
