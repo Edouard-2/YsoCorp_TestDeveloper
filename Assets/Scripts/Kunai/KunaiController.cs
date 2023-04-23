@@ -42,6 +42,8 @@ public class KunaiController : MonoBehaviour, ISubject
     [SerializeReference]
     private List<EventObserver> _observersLaunchKunai;
     [SerializeReference]
+    private List<EventObserver> _observersStuckKunai;
+    [SerializeReference]
     private List<EventObserver> _observersResetKunai;
     [SerializeReference]
     private List<EventObserver> _observersImpact;
@@ -122,6 +124,9 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         if (hit.transform.CompareTag("Rebond") && _previousCollider != hit.collider)
         {
+            if (_previousCollider != null)
+                _previousCollider.isTrigger = false;
+
             _previousCollider = hit.collider;
             _previousCollider.isTrigger = true;
             transform.up = Vector3.Reflect(transform.up, hit.normal);
@@ -180,6 +185,8 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         _animator.Play(_hashStuck);
 
+        NotifyObservers(_observersStuckKunai);
+
         Stop();
     }
 
@@ -226,11 +233,15 @@ public class KunaiController : MonoBehaviour, ISubject
     
     internal void Teleport(Vector3 position)
     {
-        _trailRenderer.transform.SetParent(null);
-        _trailRenderer.transform.position = transform.position;
-        Destroy(_trailRenderer.gameObject, 1);
+        if(_trailRenderer != null)
+        {
+            _trailRenderer.transform.SetParent(null);
+            _trailRenderer.transform.position = transform.position;
+            Destroy(_trailRenderer.gameObject, 1);
+        }
 
-        _charaController.Move(position - transform.position);
+        _charaController.enabled = false;
+        transform.position = position;
     }
     
     internal void EditDirection(Vector3 direction)
@@ -240,6 +251,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
     internal void FinishTeleport()
     {
+        _charaController.enabled = true;
         _trailRenderer = Instantiate(_prefabTrailRenderer, _transformTrailPosition.position, _transformTrailPosition.rotation, _transformTrailPosition);
     }
     
