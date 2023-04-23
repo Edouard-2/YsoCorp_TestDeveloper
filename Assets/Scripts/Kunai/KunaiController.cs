@@ -132,7 +132,7 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         _animator.Play(_hashStuck);
 
-        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation));
+        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
 
         Stop();
     }

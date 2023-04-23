@@ -22,12 +22,16 @@ public class GameManager : MonoBehaviour
 
     private int _balloonsDestroyCount;
 
+    internal Transform _transform;
+
     private List<Vector3> _listPositionsBallon = new();
     private List<Ballon> _listBalloons = new();
 
     private void Awake()
     {
         Instance = this;
+
+        _transform = transform;
 
         if (_balloonsDestroy != null)
             _balloonsDestroy.eventHandle += AddBalloonExplosed;
