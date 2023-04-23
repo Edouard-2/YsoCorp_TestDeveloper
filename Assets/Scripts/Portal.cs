@@ -29,7 +29,7 @@ public class Portal : MonoBehaviour
     {
         _canTeleport = false;
         KunaiController kunai = kunaiTransform.GetComponent<KunaiController>();
-        kunai.EditVelocityDirection(transform.up);
+        kunai.EditDirection(transform.up);
         kunai.Teleport(transform.position);
     }
 }

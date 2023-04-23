@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Ballon : MonoBehaviour, ISubject
@@ -10,7 +11,7 @@ public class Ballon : MonoBehaviour, ISubject
 
     [Header("Events")]
     [SerializeField]
-    private EventObserver _balloonsExplosed;
+    private List<EventObserver> _balloonsExplosed = new();
         
     internal int _hashExplosion = Animator.StringToHash("Explosion");
     internal int _hashRespawn = Animator.StringToHash("Respawn");
@@ -31,7 +32,7 @@ public class Ballon : MonoBehaviour, ISubject
 
         _meshAnimator.Play(_hashExplosion);
 
-        _balloonsExplosed.Raise(this);
+        _balloonsExplosed.ForEach(e => e.Raise(this));
     }
 
     internal void Respawn()

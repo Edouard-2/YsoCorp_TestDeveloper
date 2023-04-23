@@ -56,13 +56,16 @@ public class KunaiController : MonoBehaviour, ISubject
     private Rigidbody _rb;
     private CapsuleCollider _capsuleCollider;
     private PhysicMaterial _colliderMaterial;
+    private CharacterController _charaController;
+    private Collider _previousCollider;
 
     private Vector3 _startPosition;
     private Quaternion _startRotation;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        _charaController = GetComponent<CharacterController>();
+        //_rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
     }
@@ -79,36 +82,36 @@ public class KunaiController : MonoBehaviour, ISubject
         HideLineRenderer();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (_rb == null || !_hasBeenLaunched || _isStuck) return;
-        UpdateRotation(_rb.velocity.normalized);
+        if (_charaController == null || !_hasBeenLaunched || _isStuck) return;
+        _charaController.Move(transform.up * _powerLaunch * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (collision.transform.CompareTag("FinishLine"))
+        if (hit.transform.CompareTag("Rebond") && _previousCollider != hit.collider)
         {
-            _capsuleCollider.material = null;
-            Finish();
+            _previousCollider = hit.collider;
+            _previousCollider.isTrigger = true;
+            transform.up = Vector3.Reflect(transform.up, hit.normal);
         }
-        else if (collision.transform.CompareTag("Border"))
-        {
-            Respawn();
-        }
-        else if (collision.transform.CompareTag("Wood"))
+        else if (hit.transform.CompareTag("Wood"))
         {
             _capsuleCollider.material = null;
             Stuck();
         }
-        else
+        else if (hit.transform.CompareTag("FinishLine"))
         {
-            //transform.position = collision.contacts[0].point;
+            _capsuleCollider.material = null;
+            Finish();
+        }
+        else if (hit.transform.CompareTag("Border"))
+        {
+            Respawn();
         }
 
         NotifyObservers(_observersImpact);
-
-        CheckIfWoodIsInFront(collision.contacts[0]);
     }
 
     internal void StartLevel()
@@ -143,14 +146,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
         _isStuck = true;
 
-        _rb.Sleep();
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-    }
-
-    internal void EditVelocityDirection(Vector3 direction)
-    {
-        _rb.velocity = direction * _rb.velocity.magnitude;
+        _charaController.enabled = false;
     }
 
     internal void UpdateRotation(Vector3 direction)
@@ -165,6 +161,11 @@ public class KunaiController : MonoBehaviour, ISubject
 
         transform.position = position;
     }
+    
+    internal void EditDirection(Vector3 direction)
+    {
+        transform.up = direction;
+    }
 
     internal void FinishTeleport()
     {
@@ -176,14 +177,14 @@ public class KunaiController : MonoBehaviour, ISubject
         _lineRenderer.SetPosition(0, transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, transform.up), out hit, 10, _layerFeedback)){
+        if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback)){
 
             _lineRenderer.SetPosition(1, hit.point); 
             
             if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
             {
                 RaycastHit hitRebond;
-                if (Physics.Raycast(new Ray(hit.point, Vector3.Reflect(transform.up, hit.normal)), out hitRebond, (10 - hit.distance)))
+                if (Physics.SphereCast(hit.point, _charaController.radius, Vector3.Reflect(transform.up, hit.normal), out hitRebond, 10 - hit.distance, _layerFeedback))
                 {
                     _lineRenderer.SetPosition(2, hitRebond.point);
                 }
@@ -212,9 +213,10 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         _isStuck = false;
         _hasBeenLaunched = true;
-        _rb.velocity = transform.up * _powerLaunch;
 
         _capsuleCollider.enabled = true;
+
+        _charaController.enabled = true;
 
         _trailRenderer.enabled = true;
         _trailRenderer.Clear();
@@ -224,34 +226,6 @@ public class KunaiController : MonoBehaviour, ISubject
         HideLineRenderer();
 
         NotifyObservers(_observersLaunchKunai);
-
-        CheckIfWoodIsInFront(transform.up);
-    }
-
-    private void CheckIfWoodIsInFront(ContactPoint contact)
-    {
-        Vector3 dir = Vector3.Reflect((contact.point - transform.position).normalized, contact.normal);
-
-        RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, dir), out hit, 100))
-        {
-            if ((_woodLayer.value & 1 << hit.collider.gameObject.layer) > 0)
-            {
-                _capsuleCollider.material = null;
-            }
-        }
-    }
-
-    private void CheckIfWoodIsInFront(Vector3 direction)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, direction), out hit, 100))
-        {
-            if ((_woodLayer.value & 1 << hit.collider.gameObject.layer) > 0)
-            {
-                _capsuleCollider.material = null;
-            }
-        }
     }
 
     internal void Respawn()
@@ -265,11 +239,14 @@ public class KunaiController : MonoBehaviour, ISubject
             return;
         }
 
+        if(_previousCollider != null)
+        {
+            _previousCollider.isTrigger = false;
+            _previousCollider = null;
+        }
+
         transform.position = _startPosition;
         transform.rotation = _startRotation;
-
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
 
         _hasBeenLaunched = false;
 
