@@ -11,7 +11,7 @@ public class Ballon : MonoBehaviour, ISubject
 
     [Header("Events")]
     [SerializeField]
-    private List<EventObserver> _balloonsExplosed = new();
+    private List<EventObserver> _observersBalloonsExplosed = new();
         
     internal int _hashExplosion = Animator.StringToHash("Explosion");
     internal int _hashRespawn = Animator.StringToHash("Respawn");
@@ -32,7 +32,7 @@ public class Ballon : MonoBehaviour, ISubject
 
         _meshAnimator.Play(_hashExplosion);
 
-        _balloonsExplosed.ForEach(e => e.Raise(this));
+        _observersBalloonsExplosed.ForEach(e => e.Raise(this));
     }
 
     internal void Respawn()

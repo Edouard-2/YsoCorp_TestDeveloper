@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1739183506341401195
 Transform:
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 5628199346742422822}
   - {fileID: 9132332369350824273}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1739183506341401190
 SphereCollider:
@@ -70,9 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vfxExplosion: {fileID: 8866016865380549749}
   _meshAnimator: {fileID: 1330456418742217805}
-  _balloonsExplosed:
-  - {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
-  - {fileID: 11400000, guid: 5b17dcda6b2d28542b5880355e93eac6, type: 2}
+  _observersBalloonsExplosed: []
 --- !u!1 &2098502340577794512
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +87,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &9132332369350824273
 Transform:
@@ -4919,7 +4917,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6793601859121910204
 Transform:
@@ -5569,7 +5567,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5628199346742422822
 Transform:

@@ -8,12 +8,17 @@ public class Portal : MonoBehaviour
     private Portal _otherPortal;
 
     private bool _canTeleport = true;
+    private bool _canFinishTeleport = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (!_canTeleport)
         {
-            other.GetComponent<KunaiController>().FinishTeleport();
+            if (_canFinishTeleport)
+            {
+                _canFinishTeleport = false;
+                other.GetComponent<KunaiController>().FinishTeleport();
+            }
             return;
         }
         _canTeleport = false;
@@ -28,8 +33,9 @@ public class Portal : MonoBehaviour
     internal void TeleportKunai(Transform kunaiTransform)
     {
         _canTeleport = false;
+        _canFinishTeleport = true;
         KunaiController kunai = kunaiTransform.GetComponent<KunaiController>();
-        kunai.EditDirection(transform.up);
         kunai.Teleport(transform.position);
+        kunai.EditDirection(transform.up);
     }
 }

@@ -58,9 +58,6 @@ public class KunaiController : MonoBehaviour, ISubject
     private List<GameObject> _listMeshesInLevel = new();
 
     private Animator _animator;
-    private Rigidbody _rb;
-    private CapsuleCollider _capsuleCollider;
-    private PhysicMaterial _colliderMaterial;
     private CharacterController _charaController;
     private Collider _previousCollider;
 
@@ -70,15 +67,11 @@ public class KunaiController : MonoBehaviour, ISubject
     private void Awake()
     {
         _charaController = GetComponent<CharacterController>();
-        //_rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
-        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void Start()
     {
-        _colliderMaterial = _capsuleCollider.material;
-
         _startPosition = transform.position;
         _startRotation = transform.rotation;
 
@@ -103,12 +96,10 @@ public class KunaiController : MonoBehaviour, ISubject
         }
         else if (hit.transform.CompareTag("Wood"))
         {
-            _capsuleCollider.material = null;
             Stuck();
         }
         else if (hit.transform.CompareTag("FinishLine"))
         {
-            _capsuleCollider.material = null;
             Finish();
         }
         else if (hit.transform.CompareTag("Border"))
@@ -150,7 +141,8 @@ public class KunaiController : MonoBehaviour, ISubject
 
     internal void Stop()
     {
-        _trailRenderer.enabled = false;
+        if(_trailRenderer!=null)
+            _trailRenderer.enabled = false;
 
         _isStuck = true;
 
@@ -165,9 +157,10 @@ public class KunaiController : MonoBehaviour, ISubject
     internal void Teleport(Vector3 position)
     {
         _trailRenderer.transform.SetParent(null);
+        _trailRenderer.transform.position = transform.position;
         Destroy(_trailRenderer.gameObject, 1);
 
-        transform.position = position;
+        _charaController.Move(position - transform.position);
     }
     
     internal void EditDirection(Vector3 direction)
@@ -177,6 +170,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
     internal void FinishTeleport()
     {
+        Debug.Log("Finisgh telepiort");
         _trailRenderer = Instantiate(_prefabTrailRenderer, _transformTrailPosition.position, _transformTrailPosition.rotation, _transformTrailPosition);
     }
     
@@ -229,12 +223,13 @@ public class KunaiController : MonoBehaviour, ISubject
         _isStuck = false;
         _hasBeenLaunched = true;
 
-        _capsuleCollider.enabled = true;
-
         _charaController.enabled = true;
 
-        _trailRenderer.enabled = true;
-        _trailRenderer.Clear();
+        if (_trailRenderer != null)
+        {
+            _trailRenderer.enabled = true;
+            _trailRenderer.Clear();
+        }
 
         _currentKunaiCount--;
 
@@ -259,13 +254,13 @@ public class KunaiController : MonoBehaviour, ISubject
             _previousCollider.isTrigger = false;
             _previousCollider = null;
         }
+        
+        _charaController.enabled = false;
 
         transform.position = _startPosition;
         transform.rotation = _startRotation;
 
         _hasBeenLaunched = false;
-
-        _capsuleCollider.material = _colliderMaterial;
 
         ShowLineRenderer();
 
