@@ -177,28 +177,35 @@ public class KunaiController : MonoBehaviour, ISubject
         _lineRenderer.SetPosition(0, transform.position);
 
         RaycastHit hit;
-        if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback)){
-
-            _lineRenderer.SetPosition(1, hit.point); 
-            
+        if (Physics.Raycast(transform.position, transform.up, out hit, 10, _layerFeedback))
+        {
             if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
             {
-                RaycastHit hitRebond;
-                if (Physics.SphereCast(hit.point, _charaController.radius, Vector3.Reflect(transform.up, hit.normal), out hitRebond, 10 - hit.distance, _layerFeedback))
+                if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback))
                 {
-                    _lineRenderer.SetPosition(2, hitRebond.point);
+                    _lineRenderer.SetPosition(1, hit.point);
+
+                    if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+                    {
+                        RaycastHit hitRebond;
+                        if (Physics.Raycast(hit.point, Vector3.Reflect(transform.up, hit.normal), out hitRebond, 10 - hit.distance, _layerFeedback))
+                        {
+                            _lineRenderer.SetPosition(2, hitRebond.point);
+                        }
+                        else
+                        {
+                            _lineRenderer.SetPosition(2, hit.point + Vector3.Reflect(transform.up, hit.normal) * (10 - hit.distance));
+                        }
+                    }
+                    else
+                    {
+                        _lineRenderer.SetPosition(2, hit.point);
+                    }
                 }
-                else
-                {
-                    _lineRenderer.SetPosition(2, hit.point + Vector3.Reflect(transform.up, hit.normal) * (10 - hit.distance));
-                }
-            }
-            else if ((_woodLayer.value & 1 << hit.collider.gameObject.layer) > 0)
-            {
-                _lineRenderer.SetPosition(2, hit.point);
             }
             else
             {
+                _lineRenderer.SetPosition(1, hit.point);
                 _lineRenderer.SetPosition(2, hit.point);
             }
         }
