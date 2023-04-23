@@ -12,6 +12,8 @@ public class KunaiController : MonoBehaviour, ISubject
     
     [Header("Prefabs")]
     [SerializeField]
+    private GameObject _prefabMeshKunai;
+    [SerializeField]
     private TrailRenderer _prefabTrailRenderer;
 
     [Header("Components")]
@@ -42,6 +44,7 @@ public class KunaiController : MonoBehaviour, ISubject
     [SerializeReference]
     private List<EventObserver> _observersImpact;
 
+
     // ------- Private ------ //
     private bool _hasBeenLaunched;
     internal bool _isStuck;
@@ -51,6 +54,8 @@ public class KunaiController : MonoBehaviour, ISubject
     private int _hashFinish = Animator.StringToHash("Finish");
 
     internal int _currentKunaiCount = 3;
+
+    private List<GameObject> _listMeshesInLevel = new();
 
     private Animator _animator;
     private Rigidbody _rb;
@@ -126,6 +131,9 @@ public class KunaiController : MonoBehaviour, ISubject
     private void Stuck()
     {
         _animator.Play(_hashStuck);
+
+        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation));
+
         Stop();
     }
 
@@ -246,7 +254,7 @@ public class KunaiController : MonoBehaviour, ISubject
             return;
         }
 
-        if(_previousCollider != null)
+        if (_previousCollider != null)
         {
             _previousCollider.isTrigger = false;
             _previousCollider = null;
@@ -262,6 +270,23 @@ public class KunaiController : MonoBehaviour, ISubject
         ShowLineRenderer();
 
         _animator.Play(_hashRespawn);
+    }
+
+    internal void ClearMeshesInLevel()
+    {
+        foreach (GameObject go in _listMeshesInLevel)
+        {
+            Destroy(go);
+        }
+        _listMeshesInLevel.Clear();
+    }
+
+    internal void RestartLevel()
+    {
+        Stop(); 
+        ClearMeshesInLevel();
+        ResetCount();
+        Respawn();
     }
 
     internal void ResetCount()

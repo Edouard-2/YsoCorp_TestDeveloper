@@ -55,9 +55,7 @@ public class GameManager : MonoBehaviour
 
         ResetBalloons();
 
-        _kunai.Stop();
-        _kunai.ResetCount();
-        _kunai.Respawn();
+        _kunai.RestartLevel();
     }
     
     private void ResetBalloons()
