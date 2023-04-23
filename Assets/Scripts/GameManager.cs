@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     internal bool CheckAllBallonAreDestroy()
     {
+        Debug.Log(_balloonsDestroyCount);
+        Debug.Log(_listBalloons.Count);
         if(_balloonsDestroyCount == _listBalloons.Count)
         {
             FinishLevel();

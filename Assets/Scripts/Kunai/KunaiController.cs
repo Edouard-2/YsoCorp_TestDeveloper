@@ -16,9 +16,11 @@ public class KunaiController : MonoBehaviour, ISubject
     [SerializeField]
     private TrailRenderer _prefabTrailRenderer;
 
-    [Header("Components")]
+    [Header("Camera")]
     [SerializeField]
-    private KunaiInput _kunaiInput;
+    private Camera _camera;
+
+    [Header("Components")]
     [SerializeField]
     private LineRenderer _lineRenderer;
     [SerializeField]
@@ -48,6 +50,8 @@ public class KunaiController : MonoBehaviour, ISubject
     // ------- Private ------ //
     private bool _hasBeenLaunched;
     internal bool _isStuck;
+    private bool _hasPressed;
+    private bool _canPlay;
 
     private int _hashStuck = Animator.StringToHash("Stuck");
     private int _hashRespawn = Animator.StringToHash("Spawn");
@@ -61,7 +65,10 @@ public class KunaiController : MonoBehaviour, ISubject
     private CharacterController _charaController;
     private Collider _previousCollider;
 
+    private Vector2 _endPositionInput;
+    private Vector2 _startPositionInput;
     private Vector3 _startPosition;
+    private Vector3 _directionRotation;
     private Quaternion _startRotation;
 
     private void Awake()
@@ -77,9 +84,34 @@ public class KunaiController : MonoBehaviour, ISubject
 
         _trailRenderer.enabled = false;
 
+        _startPositionInput = _camera.WorldToScreenPoint(transform.position);
+
         HideLineRenderer();
     }
 
+    private void Update()
+    {
+        if (_canPlay)
+        {
+            if (Input.touchCount > 0)
+            {
+                _hasPressed = true;
+                UpdateKunaiRotation(Input.mousePosition);
+            }
+            else if (Input.touchCount == 0 && _hasPressed)
+            {
+                _hasPressed = false;
+
+                _canPlay = false;
+
+                UpdateKunaiRotation(Input.mousePosition);
+
+                _endPositionInput = _startPositionInput;
+
+                Launch();
+            }
+        }
+    }
     private void FixedUpdate()
     {
         if (_charaController == null || !_hasBeenLaunched || _isStuck) return;
@@ -110,6 +142,31 @@ public class KunaiController : MonoBehaviour, ISubject
         NotifyObservers(_observersImpact);
     }
 
+    private void UpdateEndPosition(Vector3 padPosition)
+    {
+        // Update User Position
+        _endPositionInput = padPosition;
+    }
+
+    internal void UpdateKunaiRotation(Vector3? padPosition = null, bool feedback = true)
+    {
+        if (padPosition != null)
+            UpdateEndPosition((Vector3)padPosition);
+
+        // Calcul direction
+        Vector2 dir = (_startPositionInput - _endPositionInput).normalized;
+        _directionRotation.y = dir.x;
+        _directionRotation.z = dir.y;
+
+        // Update Kunai Direction
+        UpdateRotation(dir);
+
+        if (!feedback) return;
+
+        // Update Kunai Direction Feedback
+        UpdateDirectionFeedback(dir);
+    }
+
     internal void StartLevel()
     {
         if(_animator == null)
@@ -123,9 +180,22 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         _animator.Play(_hashStuck);
 
-        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
-
         Stop();
+    }
+
+    private void SpawnMesh()
+    {
+        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
+    }
+
+    internal void InputStop()
+    {
+        _canPlay = false;
+    }
+
+    private void InputReady()
+    {
+        _canPlay = true;
     }
 
     private async void Finish()
@@ -170,7 +240,6 @@ public class KunaiController : MonoBehaviour, ISubject
 
     internal void FinishTeleport()
     {
-        Debug.Log("Finisgh telepiort");
         _trailRenderer = Instantiate(_prefabTrailRenderer, _transformTrailPosition.position, _transformTrailPosition.rotation, _transformTrailPosition);
     }
     
@@ -304,11 +373,6 @@ public class KunaiController : MonoBehaviour, ISubject
         _lineRenderer.enabled = true;
     }
 
-    private void InputReady()
-    {
-        _kunaiInput.InputReady();
-        _kunaiInput.UpdateKunaiRotation(null, false);
-    }
 
     private void NotifyObservers(List<EventObserver> listObservers)
     {

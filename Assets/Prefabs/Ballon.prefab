@@ -70,7 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vfxExplosion: {fileID: 8866016865380549749}
   _meshAnimator: {fileID: 1330456418742217805}
-  _observersBalloonsExplosed: []
+  _observersBalloonsExplosed:
+  - {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
 --- !u!1 &2098502340577794512
 GameObject:
   m_ObjectHideFlags: 0
