@@ -382,7 +382,7 @@ CapsuleCollider:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 1023
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 1
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
@@ -439,6 +439,8 @@ MonoBehaviour:
   _trailRenderer: {fileID: 308670062245536993}
   _transformTrailPosition: {fileID: 8703991140281930319}
   _vfxStuckInWood: {fileID: 5217887628408997496, guid: c469ce7899d551b4887e41eccdf2a623,
+    type: 3}
+  _vfxImpactRebond: {fileID: 5217887628408997496, guid: cde291cb12386f041b9bd33ffa562fee,
     type: 3}
   _woodLayer:
     serializedVersion: 2
@@ -611,6 +613,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Meshes
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322867141540995664, guid: 450cd483d0203484b9d645656ebfa8fe,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3322867141540995664, guid: 450cd483d0203484b9d645656ebfa8fe,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4993132226989054857, guid: 450cd483d0203484b9d645656ebfa8fe,
         type: 3}

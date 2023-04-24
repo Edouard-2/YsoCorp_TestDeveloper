@@ -33,6 +33,8 @@ public class KunaiController : MonoBehaviour, ISubject
     [Header("VFX")]
     [SerializeField]
     private GameObject _vfxStuckInWood;
+    [SerializeField]
+    private GameObject _vfxImpactRebond;
 
     [Header("Layers")]
     [SerializeField]
@@ -140,6 +142,8 @@ public class KunaiController : MonoBehaviour, ISubject
             _previousCollider = hit.collider;
             _previousCollider.isTrigger = true;
             transform.up = Vector3.Reflect(transform.up, hit.normal);
+
+            Destroy(Instantiate(_vfxImpactRebond, transform.position, Quaternion.identity),1);
         }
         else if (hit.transform.CompareTag("Wood"))
         {

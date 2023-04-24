@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_1_TEST.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
   - enabled: 1
+    path: Assets/Scenes/Normal 0 (Rebond)/Level_3.unity
+    guid: 4d24b3ac62971e24dbfb8dbf2e558c75
+  - enabled: 1
+    path: Assets/Scenes/Normal 0 (Rebond)/Level_4.unity
+    guid: 598c89c744bda2c448cbee6e69a5d979
+  - enabled: 1
+    path: Assets/Scenes/Normal 0 (Rebond)/Level_5.unity
+    guid: f850fcec1236fc04f8833d26fade6b4b
+  - enabled: 1
     path: Assets/Scenes/Normal 1 (Portal)/Level_6.unity
     guid: 98acd0cdf4ebc5144b8ad5bd709d4714
   - enabled: 1
@@ -23,15 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Easy (No Rebond & No Portal)/Level_2.unity
     guid: e7fdab30b34c9df4ba0e98e463e7a364
-  - enabled: 1
-    path: Assets/Scenes/Normal 0 (Rebond)/Level_3.unity
-    guid: 4d24b3ac62971e24dbfb8dbf2e558c75
-  - enabled: 1
-    path: Assets/Scenes/Normal 0 (Rebond)/Level_4.unity
-    guid: 598c89c744bda2c448cbee6e69a5d979
-  - enabled: 1
-    path: Assets/Scenes/Normal 0 (Rebond)/Level_5.unity
-    guid: f850fcec1236fc04f8833d26fade6b4b
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: 0af1f1f852e74b74c84e807e990a32da
