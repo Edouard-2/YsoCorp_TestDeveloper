@@ -6,14 +6,13 @@ public class UIEndLevel : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private EventObserver _eventObserverEndLevel;
 
+    [SerializeField]
     private Animator _animator;
 
     private int _hashEndLevel = Animator.StringToHash("EndLevel");
 
     private void Awake()
     {
-        _animator = transform.parent.GetComponent<Animator>();
-
         _eventObserverEndLevel.eventHandle += Display;
     }
 

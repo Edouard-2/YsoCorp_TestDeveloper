@@ -19,6 +19,8 @@ public class SystemManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+
         Instance = this;
 
         _maxSceneID = SceneManager.sceneCountInBuildSettings;

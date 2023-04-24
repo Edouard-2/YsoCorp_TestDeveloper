@@ -29,6 +29,10 @@ public class KunaiController : MonoBehaviour, ISubject
     private TrailRenderer _trailRenderer;
     [SerializeField]
     private Transform _transformTrailPosition;
+    [SerializeField]
+    private CharacterController _charaController;
+    [SerializeField]
+    private Animator _animator;
 
     [Header("VFX")]
     [SerializeField]
@@ -75,8 +79,6 @@ public class KunaiController : MonoBehaviour, ISubject
 
     private List<GameObject> _listMeshesInLevel = new();
 
-    private Animator _animator;
-    private CharacterController _charaController;
     private Collider _previousCollider;
 
     private Vector2 _endPositionInput;
@@ -85,11 +87,6 @@ public class KunaiController : MonoBehaviour, ISubject
     private Vector3 _directionRotation;
     private Quaternion _startRotation;
 
-    private void Awake()
-    {
-        _charaController = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
-    }
 
     private void Start()
     {
@@ -305,7 +302,6 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
         {
-            Debug.Log("RebondLineFeedback");
             if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback))
             {
                 _lineRenderer.SetPosition(1, hit.point);

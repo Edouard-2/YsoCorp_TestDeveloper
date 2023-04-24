@@ -343,7 +343,7 @@ Transform:
   - {fileID: 1259374218894336690}
   - {fileID: 8703991140281930319}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7345087369527259145
 CapsuleCollider:
@@ -438,6 +438,8 @@ MonoBehaviour:
   _lineRendererForPortal: {fileID: 2058826161}
   _trailRenderer: {fileID: 308670062245536993}
   _transformTrailPosition: {fileID: 8703991140281930319}
+  _charaController: {fileID: 2693065723083496370}
+  _animator: {fileID: 1243695869}
   _vfxStuckInWood: {fileID: 5217887628408997496, guid: c469ce7899d551b4887e41eccdf2a623,
     type: 3}
   _vfxImpactRebond: {fileID: 5217887628408997496, guid: cde291cb12386f041b9bd33ffa562fee,

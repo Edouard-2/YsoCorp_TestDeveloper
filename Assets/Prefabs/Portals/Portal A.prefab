@@ -1929,7 +1929,7 @@ Transform:
   - {fileID: 3505709310486540116}
   - {fileID: 6248919517991274166}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3877916849748616402
 BoxCollider:
@@ -1978,7 +1978,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &4312565790181481833
 MonoBehaviour:
   m_ObjectHideFlags: 0
