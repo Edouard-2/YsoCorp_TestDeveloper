@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,10 +13,13 @@ public class UIRestartLevel : MonoBehaviour, IPointerClickHandler, IPointerDownH
         _kunaiInput.InputStop();
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public async void OnPointerUp(PointerEventData eventData)
     {
         transform.localScale = Vector3.one;
-        _kunaiInput.InputStop();
+
+        await Task.Delay(50);
+
+        _kunaiInput.InputReady();
     }
 
     public void OnPointerClick(PointerEventData eventData)

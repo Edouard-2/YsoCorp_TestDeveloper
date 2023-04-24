@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour, ISubject
     private EventObserver _balloonsDestroy;
     [SerializeField]
     private EventObserver _eventObserverEndLevel;
+    [SerializeField]
+    private EventObserver _eventRestartLevel;
 
     [Header("Components")]
     [SerializeField]
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour, ISubject
     
     internal void RestartLevel()
     {
+        _eventRestartLevel.Raise(this);
+
         _balloonsDestroyCount = 0;
 
         ResetBalloons();

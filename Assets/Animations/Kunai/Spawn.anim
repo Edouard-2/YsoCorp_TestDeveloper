@@ -336,7 +336,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: InputReady
+    functionName: CanPlay
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

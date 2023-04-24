@@ -48,6 +48,7 @@ MonoBehaviour:
   _balloonsDestroy: {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
   _eventObserverEndLevel: {fileID: 11400000, guid: f75e9ec916bb0ad48af76fef758c52fe,
     type: 2}
+  _eventRestartLevel: {fileID: 11400000, guid: 463ec1aa57c066840808311e80470200, type: 2}
   _kunai: {fileID: 0}
   _ballonPrefab: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
     type: 3}

@@ -70,6 +70,7 @@ public class KunaiController : MonoBehaviour, ISubject
     internal bool _isStuck;
     private bool _hasPressed;
     private bool _canPlay;
+    private bool _InputStop = false;
 
     private int _hashStuck = Animator.StringToHash("Stuck");
     private int _hashRespawn = Animator.StringToHash("Spawn");
@@ -102,7 +103,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
     private void Update()
     {
-        if (_canPlay)
+        if (_canPlay && !_InputStop)
         {
             if (Input.touchCount > 0)
             {
@@ -122,6 +123,7 @@ public class KunaiController : MonoBehaviour, ISubject
                 Launch();
             }
         }
+
     }
     private void FixedUpdate()
     {
@@ -208,14 +210,19 @@ public class KunaiController : MonoBehaviour, ISubject
         _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
     }
 
-    internal void InputStop()
-    {
-        _canPlay = false;
-    }
-
-    private void InputReady()
+    internal void CanPlay()
     {
         _canPlay = true;
+    }
+
+    internal void InputStop()
+    {
+        _InputStop = true;
+    }
+
+    internal void InputReady()
+    {
+        _InputStop = false;
     }
 
     private async void Finish()
