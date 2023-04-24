@@ -24,15 +24,23 @@ public class KunaiController : MonoBehaviour, ISubject
     [SerializeField]
     private LineRenderer _lineRenderer;
     [SerializeField]
+    private LineRenderer _lineRendererForPortal;
+    [SerializeField]
     private TrailRenderer _trailRenderer;
     [SerializeField]
     private Transform _transformTrailPosition;
+
+    [Header("VFX")]
+    [SerializeField]
+    private GameObject _vfxStuckInWood;
 
     [Header("Layers")]
     [SerializeField]
     private LayerMask _woodLayer;
     [SerializeField]
     private LayerMask _rebondLayer;
+    [SerializeField]
+    private LayerMask _portalLayer;
     [SerializeField]
     private LayerMask _layerFeedback;
 
@@ -43,6 +51,8 @@ public class KunaiController : MonoBehaviour, ISubject
     private List<EventObserver> _observersLaunchKunai;
     [SerializeReference]
     private List<EventObserver> _observersStuckKunai;
+    [SerializeReference]
+    private List<EventObserver> _observersTeleport;
     [SerializeReference]
     private List<EventObserver> _observersResetKunai;
     [SerializeReference]
@@ -183,6 +193,8 @@ public class KunaiController : MonoBehaviour, ISubject
 
     private void Stuck()
     {
+        Destroy(Instantiate(_vfxStuckInWood, transform.position, transform.rotation), 1);
+
         _animator.Play(_hashStuck);
 
         NotifyObservers(_observersStuckKunai);
@@ -240,6 +252,8 @@ public class KunaiController : MonoBehaviour, ISubject
             Destroy(_trailRenderer.gameObject, 1);
         }
 
+        NotifyObservers(_observersTeleport);
+
         _charaController.enabled = false;
         transform.position = position;
     }
@@ -254,7 +268,9 @@ public class KunaiController : MonoBehaviour, ISubject
         _charaController.enabled = true;
         _trailRenderer = Instantiate(_prefabTrailRenderer, _transformTrailPosition.position, _transformTrailPosition.rotation, _transformTrailPosition);
     }
-    
+
+    #region Feedback Kunai Direction
+
     internal void UpdateDirectionFeedback(Vector3 direction)
     {
         _lineRenderer.SetPosition(0, transform.position);
@@ -262,41 +278,94 @@ public class KunaiController : MonoBehaviour, ISubject
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.up, out hit, 10, _layerFeedback))
         {
-            if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
-            {
-                if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback))
-                {
-                    _lineRenderer.SetPosition(1, hit.point);
+            // REBOND
+            if (RebondLineFeedback(hit))
+                return;
 
-                    if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
-                    {
-                        RaycastHit hitRebond;
-                        if (Physics.Raycast(hit.point, Vector3.Reflect(transform.up, hit.normal), out hitRebond, 10 - hit.distance, _layerFeedback))
-                        {
-                            _lineRenderer.SetPosition(2, hitRebond.point);
-                        }
-                        else
-                        {
-                            _lineRenderer.SetPosition(2, hit.point + Vector3.Reflect(transform.up, hit.normal) * (10 - hit.distance));
-                        }
-                    }
-                    else
-                    {
-                        _lineRenderer.SetPosition(2, hit.point);
-                    }
-                }
-            }
-            else
-            {
-                _lineRenderer.SetPosition(1, hit.point);
-                _lineRenderer.SetPosition(2, hit.point);
-            }
+            // PORTAL
+            if (PortalLineFeedback(hit))
+                return;
+            
+            // WOOD
+            _lineRenderer.SetPosition(1, hit.point);
+            _lineRenderer.SetPosition(2, hit.point);
+            
         }
         else
         {
             _lineRenderer.SetPosition(1, transform.position + transform.up * 10);
             _lineRenderer.SetPosition(2, transform.position + transform.up * 10);
         }
+    }
+    private bool RebondLineFeedback(RaycastHit hit)
+    {
+        if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+        {
+            Debug.Log("RebondLineFeedback");
+            if (Physics.SphereCast(transform.position, _charaController.radius, transform.up, out hit, 10, _layerFeedback))
+            {
+                _lineRenderer.SetPosition(1, hit.point);
+                if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+                {
+                    RaycastHit hitRebond;
+                    if (Physics.Raycast(hit.point, Vector3.Reflect(transform.up, hit.normal), out hitRebond, 10 - hit.distance, _layerFeedback))
+                    {
+                        _lineRenderer.SetPosition(2, hitRebond.point);
+                    }
+                    else
+                    {
+                        _lineRenderer.SetPosition(2, hit.point + Vector3.Reflect(transform.up, hit.normal) * (10 - hit.distance));
+                    }
+                }
+                else
+                {
+                    _lineRenderer.SetPosition(2, hit.point);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private bool PortalLineFeedback(RaycastHit hit)
+    {
+        if ((_portalLayer.value & 1 << hit.collider.gameObject.layer) > 0)
+        {
+            if (!_lineRendererForPortal.enabled) ShowLineRendererForPortal();
+
+            _lineRenderer.SetPosition(1, hit.point);
+            _lineRenderer.SetPosition(2, hit.point);
+
+            Portal otherPortal = hit.collider.GetComponent<Portal>()._otherPortal;
+            Vector3 portalUp = otherPortal.transform.up;
+            Vector3 positionOtherPortal = CalculPosiotionForNextPortal(hit.point, hit.transform, otherPortal);
+
+            _lineRendererForPortal.SetPosition(0, positionOtherPortal);
+
+            RaycastHit hitPortal;
+            if (hit.collider.Raycast(new Ray(positionOtherPortal, portalUp), out hitPortal, 10 - hit.distance))
+            {
+                _lineRendererForPortal.SetPosition(1, hitPortal.point);
+            }
+            else
+            {
+                _lineRendererForPortal.SetPosition(1, positionOtherPortal + portalUp * (10 - hit.distance));
+            }
+            return true;
+        }
+
+        if(_lineRendererForPortal.enabled) HideLineRendererPortal();
+        return false;
+    }
+
+    #endregion
+
+    internal Vector3 CalculPosiotionForNextPortal(Vector3 contactHitPos, Transform portalHit, Portal otherPortal)
+    {
+        Vector3 directionOffsetFromPortal = (portalHit.position - contactHitPos);
+        float dotForOtherPortal = Vector3.Dot(portalHit.right, directionOffsetFromPortal);
+
+        return otherPortal.transform.position + otherPortal.transform.right * dotForOtherPortal;
     }
 
     internal void Launch()
@@ -377,12 +446,27 @@ public class KunaiController : MonoBehaviour, ISubject
         _lineRenderer.SetPosition(0, Vector3.zero);
         _lineRenderer.SetPosition(1, Vector3.zero);
         _lineRenderer.SetPosition(2, Vector3.zero);
+
+        HideLineRendererPortal();
+    }
+    private void HideLineRendererPortal()
+    {
+        _lineRendererForPortal.enabled = false;
+        _lineRendererForPortal.SetPosition(0, Vector3.zero);
+        _lineRendererForPortal.SetPosition(1, Vector3.zero);
     }
     
     private void ShowLineRenderer()
     {
         if(_lineRenderer.enabled) return;
         _lineRenderer.enabled = true;
+
+        ShowLineRendererForPortal();
+    }
+    private void ShowLineRendererForPortal()
+    {
+        if(_lineRendererForPortal.enabled) return;
+        _lineRendererForPortal.enabled = true;
     }
 
 

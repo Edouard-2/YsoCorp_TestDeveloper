@@ -5,7 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     [SerializeField]
-    private Portal _otherPortal;
+    internal Portal _otherPortal;
 
     private bool _canTeleport = true;
     private bool _canFinishTeleport = false;
@@ -22,7 +22,7 @@ public class Portal : MonoBehaviour
             return;
         }
         _canTeleport = false;
-        _otherPortal.TeleportKunai(other.transform);
+        _otherPortal.TeleportKunai(other.transform, transform);
     }
     
     private void OnTriggerExit(Collider other)
@@ -30,12 +30,17 @@ public class Portal : MonoBehaviour
         _canTeleport = true;
     }
 
-    internal void TeleportKunai(Transform kunaiTransform)
+    internal void TeleportKunai(Transform kunaiTransform, Transform otherPortalTransform)
     {
         _canTeleport = false;
         _canFinishTeleport = true;
         KunaiController kunai = kunaiTransform.GetComponent<KunaiController>();
-        kunai.Teleport(transform.position);
+
+        Vector3 positionOtherPortal = kunai.CalculPosiotionForNextPortal(kunaiTransform.position, otherPortalTransform, this);
+
+        kunai.Teleport(positionOtherPortal);
+
         kunai.EditDirection(transform.up);
+
     }
 }

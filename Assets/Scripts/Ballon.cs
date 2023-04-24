@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Ballon : MonoBehaviour, ISubject
@@ -28,10 +29,9 @@ public class Ballon : MonoBehaviour, ISubject
         if (_hasExplosed) return;
         _hasExplosed = true;
 
-        _vfxExplosion.Play();
-
         _meshAnimator.Play(_hashExplosion);
 
+        _vfxExplosion.Play();
         _observersBalloonsExplosed.ForEach(e => e.Raise(this));
     }
 
