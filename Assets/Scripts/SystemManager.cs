@@ -29,7 +29,7 @@ public class SystemManager : MonoBehaviour
     {
         FadeOut();
 
-        await Task.Delay(1000);
+        await Task.Delay(300);
         
         LauchSceneAsync();
     }
@@ -46,7 +46,7 @@ public class SystemManager : MonoBehaviour
     {
         FadeOut();
 
-        await Task.Delay(1000);
+        await Task.Delay(300);
 
         SceneManager.UnloadSceneAsync(sceneID);
     }
@@ -70,7 +70,7 @@ public class SystemManager : MonoBehaviour
     private async void FinishLoading(AsyncOperation operation)
     {
         FadeIn();
-        await Task.Delay(600);
+        await Task.Delay(300);
 
         if (_currentSceneID == _creditSceneID) return;
         GameManager.Instance?.StartLevel();

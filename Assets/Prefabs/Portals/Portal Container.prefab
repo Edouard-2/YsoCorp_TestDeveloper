@@ -152,6 +152,66 @@ PrefabInstance:
       propertyPath: _otherPortal
       value: 
       objectReference: {fileID: 4568461824748108613}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.49999973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.50000036
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274166, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274167, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 0.43033242
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274167, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0.712142
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274167, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
+      value: 2.190354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274167, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 2.190354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248919517991274167, guid: 660bfb50c56e8d24d808644c135b95b1,
+        type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.3633279
+      objectReference: {fileID: 0}
     - target: {fileID: 8604858861930440579, guid: 660bfb50c56e8d24d808644c135b95b1,
         type: 3}
       propertyPath: m_RootOrder

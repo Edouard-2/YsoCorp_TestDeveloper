@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, ISubject
 {
     public static GameManager Instance;
 
-    [Header("Components")]
+    [Header("Events")]
     [SerializeField]
     private EventObserver _balloonsDestroy;
+    [SerializeField]
+    private EventObserver _eventObserverEndLevel;
 
     [Header("Components")]
     [SerializeField]
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField]
     private GameObject _ballonPrefab;
+
 
     private int _balloonsDestroyCount;
 
@@ -49,6 +52,11 @@ public class GameManager : MonoBehaviour
     }
 
     internal void FinishLevel()
+    {
+        _eventObserverEndLevel.Raise(this);
+    }
+
+    internal void SwitchSceneForEndLevel()
     {
         SystemManager.Instance.FinishLevel();
     }

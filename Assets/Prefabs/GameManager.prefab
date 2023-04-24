@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413387378498329403}
   - component: {fileID: 1413387378498329400}
+  - component: {fileID: 485271743364045814}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1413387378498329400
 MonoBehaviour:
@@ -44,6 +45,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b995e87334b3d4b82c255b676cabfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
-  _currentSceneID: 0
-  _allScenesID: 
+  _balloonsDestroy: {fileID: 11400000, guid: bbe1cacc65dd5e04e838c686e05f3127, type: 2}
+  _eventObserverEndLevel: {fileID: 11400000, guid: f75e9ec916bb0ad48af76fef758c52fe,
+    type: 2}
+  _kunai: {fileID: 0}
+  _ballonPrefab: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+    type: 3}
+--- !u!95 &485271743364045814
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413387378498329402}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 097e5ce89fed6a74bbd7d4e945eb376f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
