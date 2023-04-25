@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4322b72ab7ad8ed4597e49e9d2a4f050,
+  m_LightingDataAsset: {fileID: 112000000, guid: a100466f590f5b844b367b83acecc46c,
     type: 2}
   m_LightingSettings: {fileID: 1620284999}
 --- !u!196 &4
@@ -130,7 +130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62874
+  m_Name: pb_Mesh43136
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -717,6 +717,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -731,6 +735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -787,6 +796,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -796,6 +810,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -814,7 +838,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62872
+  m_Name: pb_Mesh43134
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -981,6 +1005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -995,6 +1023,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -1051,6 +1084,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -1060,6 +1098,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2353
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1307,7 +1355,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62870
+  m_Name: pb_Mesh43132
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1733,6 +1781,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -1747,6 +1799,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -1803,6 +1860,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -1812,6 +1874,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1868,7 +1940,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62864
+  m_Name: pb_Mesh43126
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2399,7 +2471,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62876
+  m_Name: pb_Mesh43138
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2564,7 +2636,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62868
+  m_Name: pb_Mesh43130
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2731,6 +2803,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -2745,6 +2821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -2801,6 +2882,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -2810,6 +2896,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2356
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2894,6 +2990,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -2908,6 +3008,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -2964,6 +3069,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -2973,6 +3083,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2362
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3162,7 +3282,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62866
+  m_Name: pb_Mesh43128
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3329,6 +3449,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3343,6 +3467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -3399,6 +3528,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3408,6 +3542,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2359
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3461,6 +3605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3475,6 +3623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -3531,6 +3684,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2505423910343016970, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3540,6 +3698,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 2362
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3574,7 +3742,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2139380213
 Transform:
@@ -4021,6 +4189,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background Meshes
       objectReference: {fileID: 0}
+    - target: {fileID: 5712288215515169690, guid: 6b0984b969a417f45b758ead524432ce,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5712288215515169691, guid: 6b0984b969a417f45b758ead524432ce,
         type: 3}
       propertyPath: m_RootOrder
@@ -4219,6 +4392,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2139380213}
     m_Modifications:
+    - target: {fileID: 1037991714, guid: 3d15b8b245f81bb4aae9b793b01fa748, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722122606712032, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722122678429226, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722123945524527, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722124276007970, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6239722124547941464, guid: 3d15b8b245f81bb4aae9b793b01fa748,
         type: 3}
       propertyPath: m_RootOrder
@@ -4278,6 +4475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Borders
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722124547941465, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

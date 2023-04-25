@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 3c0604677fc7e1a47a90b880290dafb3,
+  m_LightingDataAsset: {fileID: 112000000, guid: 62711abfa9f0e31489a9e707b990a6ba,
     type: 2}
   m_LightingSettings: {fileID: 1620284999}
 --- !u!196 &4
@@ -130,7 +130,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171476
+  m_Name: pb_Mesh42112
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -546,6 +546,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 531477996340841662, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -555,6 +559,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ballon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739183506341401191, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
@@ -609,6 +618,21 @@ PrefabInstance:
     - target: {fileID: 1739183506341401195, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098502340577794512, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540018403268633364, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746441203492255520, guid: f5b58340dd74e3a4cb4515c73640936b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -799,7 +823,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171474
+  m_Name: pb_Mesh42110
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -966,6 +990,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -1250,6 +1278,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -1431,7 +1463,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171472
+  m_Name: pb_Mesh42108
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -1727,7 +1759,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171466
+  m_Name: pb_Mesh42102
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2258,7 +2290,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171478
+  m_Name: pb_Mesh42114
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2423,7 +2455,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171470
+  m_Name: pb_Mesh42106
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2590,6 +2622,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -2718,7 +2754,7 @@ LightingSettings:
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 1
   m_BakeBackend: 2
-  m_LightmapMaxSize: 1024
+  m_LightmapMaxSize: 512
   m_BakeResolution: 40
   m_Padding: 2
   m_LightmapCompression: 3
@@ -2942,7 +2978,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh171468
+  m_Name: pb_Mesh42104
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3109,6 +3145,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3228,6 +3268,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813919656}
     m_Modifications:
+    - target: {fileID: 87420491, guid: f5b58340dd74e3a4cb4515c73640936b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 127929704999263207, guid: f5b58340dd74e3a4cb4515c73640936b,
         type: 3}
       propertyPath: m_Mesh
@@ -3394,7 +3438,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2139380213
 Transform:
@@ -3841,6 +3885,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background Meshes
       objectReference: {fileID: 0}
+    - target: {fileID: 5712288215515169690, guid: 6b0984b969a417f45b758ead524432ce,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5712288215515169691, guid: 6b0984b969a417f45b758ead524432ce,
         type: 3}
       propertyPath: m_RootOrder
@@ -4039,6 +4088,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2139380213}
     m_Modifications:
+    - target: {fileID: 1037991714, guid: 3d15b8b245f81bb4aae9b793b01fa748, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722122606712032, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722122678429226, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722123945524527, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722124276007970, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6239722124547941464, guid: 3d15b8b245f81bb4aae9b793b01fa748,
         type: 3}
       propertyPath: m_RootOrder
@@ -4098,6 +4171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Borders
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239722124547941465, guid: 3d15b8b245f81bb4aae9b793b01fa748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
