@@ -49,7 +49,7 @@ public class Portal : MonoBehaviour
 
         kunai.Teleport(positionOtherPortal);
 
-        kunai.EditDirection(transform.up);
+        kunai.UpdateRotation(transform.up);
     }
 
     internal void SpawnVFXTeleport(GameObject prefab)

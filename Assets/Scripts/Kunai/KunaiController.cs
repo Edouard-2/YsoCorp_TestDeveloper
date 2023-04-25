@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -74,7 +75,7 @@ public class KunaiController : MonoBehaviour, ISubject
 
     private int _hashStuck = Animator.StringToHash("Stuck");
     private int _hashRespawn = Animator.StringToHash("Spawn");
-    private int _hashFinish = Animator.StringToHash("Finish");
+    private int _hashFinish = Animator.StringToHash("FinishLevel");
 
     internal int _currentKunaiCount = 3;
 
@@ -103,13 +104,16 @@ public class KunaiController : MonoBehaviour, ISubject
 
     private void Update()
     {
+        // If the player can play
         if (_canPlay && !_InputStop)
         {
+            // If the player touch the screen
             if (Input.touchCount > 0)
             {
                 _hasPressed = true;
                 UpdateKunaiRotation(Input.mousePosition);
             }
+            // If the player released the screen
             else if (Input.touchCount == 0 && _hasPressed)
             {
                 _hasPressed = false;
@@ -123,10 +127,11 @@ public class KunaiController : MonoBehaviour, ISubject
                 Launch();
             }
         }
-
     }
+
     private void FixedUpdate()
     {
+        // Move the Kunai upward he's launch
         if (_charaController == null || !_hasBeenLaunched || _isStuck) return;
         _charaController.Move(transform.up * _powerLaunch * Time.deltaTime);
     }
@@ -150,7 +155,7 @@ public class KunaiController : MonoBehaviour, ISubject
         }
         else if (hit.transform.CompareTag("FinishLine"))
         {
-            Finish();
+            FinishLevel();
         }
         else if (hit.transform.CompareTag("Border"))
         {
@@ -160,55 +165,8 @@ public class KunaiController : MonoBehaviour, ISubject
         NotifyObservers(_observersImpact);
     }
 
-    private void UpdateEndPosition(Vector3 padPosition)
-    {
-        // Update User Position
-        _endPositionInput = padPosition;
-    }
-
-    internal void UpdateKunaiRotation(Vector3? padPosition = null, bool feedback = true)
-    {
-        if (padPosition != null)
-            UpdateEndPosition((Vector3)padPosition);
-
-        // Calcul direction
-        Vector2 dir = (_startPositionInput - _endPositionInput).normalized;
-        _directionRotation.y = dir.x;
-        _directionRotation.z = dir.y;
-
-        // Update Kunai Direction
-        UpdateRotation(dir);
-
-        if (!feedback) return;
-
-        // Update Kunai Direction Feedback
-        UpdateDirectionFeedback(dir);
-    }
-
-    internal void StartLevel()
-    {
-        if(_animator == null)
-            _animator = GetComponent<Animator>();
-        _animator.Play(_hashRespawn);
-
-        ShowLineRenderer();
-    }
-
-    private void Stuck()
-    {
-        Destroy(Instantiate(_vfxStuckInWood, transform.position, transform.rotation), 1);
-
-        _animator.Play(_hashStuck);
-
-        NotifyObservers(_observersStuckKunai);
-
-        Stop();
-    }
-
-    private void SpawnMesh()
-    {
-        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
-    }
+    // ----------------- Input Management ----------------- //
+    #region Input Management
 
     internal void CanPlay()
     {
@@ -224,8 +182,33 @@ public class KunaiController : MonoBehaviour, ISubject
     {
         _InputStop = false;
     }
+    #endregion
 
-    private async void Finish()
+    // ----------------- Level Behaviour ----------------- //
+    #region Level Behaviour
+
+    /// <summary>
+    /// Remove the kunais stuck in the woods
+    /// </summary>
+    internal void ClearMeshesInLevel()
+    {
+        foreach (GameObject go in _listMeshesInLevel)
+        {
+            Destroy(go);
+        }
+        _listMeshesInLevel.Clear();
+    }
+
+    /// <summary>
+    /// Reset the number of kunai that the player has
+    /// </summary>
+    internal void ResetCount()
+    {
+        _currentKunaiCount = 3;
+        NotifyObservers(_observersResetKunai);
+    }
+
+    private async void FinishLevel()
     {
         Stop();
 
@@ -236,9 +219,119 @@ public class KunaiController : MonoBehaviour, ISubject
         GameManager.Instance?.FinishLevel();
     }
 
+    internal void StartLevel()
+    {
+        if (_animator == null)
+            _animator = GetComponent<Animator>();
+        _animator.Play(_hashRespawn);
+
+        ShowLineRenderer();
+    }
+
+    /// <summary>
+    /// Reset all stats and the position of the player
+    /// </summary>
+    internal void RestartLevel()
+    {
+        Stop();
+        ClearMeshesInLevel();
+        ResetCount();
+        Respawn();
+    }
+
+    #endregion
+
+    // ----------------- Gameplay Behaviour ----------------- //
+    #region Gameplay Behaviour
+
+    /// <summary>
+    /// Throw the kunai in the current direction
+    /// </summary>
+    internal void Launch()
+    {
+        _isStuck = false;
+        _hasBeenLaunched = true;
+
+        _charaController.enabled = true;
+
+        if (_trailRenderer != null)
+        {
+            _trailRenderer.enabled = true;
+            _trailRenderer.Clear();
+        }
+
+        _currentKunaiCount--;
+
+        HideLineRenderer();
+
+        NotifyObservers(_observersLaunchKunai);
+    }
+
+    internal void UpdateRotation(Vector3 direction)
+    {
+        transform.up = direction;
+    }
+
+    /// <summary>
+    /// Respawn the player and restart the current level
+    /// <summary>
+    internal void Respawn()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.CheckAllBallonAreDestroy())
+            return;
+
+        if (_currentKunaiCount == 0)
+        {
+            GameManager.Instance.RestartLevel();
+            return;
+        }
+
+        if (_previousCollider != null)
+        {
+            _previousCollider.isTrigger = false;
+            _previousCollider = null;
+        }
+
+        _charaController.enabled = false;
+
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
+
+        _hasBeenLaunched = false;
+
+        ShowLineRenderer();
+
+        _animator.Play(_hashRespawn);
+    }
+
+    /// <summary>
+    /// Spawn mesh when the kunai is stuck on a wood board
+    /// </summary>
+    private void SpawnMesh()
+    {
+        _listMeshesInLevel.Add(Instantiate(_prefabMeshKunai, transform.position, transform.rotation, GameManager.Instance._transform));
+    }
+
+    /// <summary>
+    /// When the kunai collide with wood
+    /// </summary>
+    private void Stuck()
+    {
+        Destroy(Instantiate(_vfxStuckInWood, transform.position, transform.rotation), 1);
+
+        _animator.Play(_hashStuck);
+
+        NotifyObservers(_observersStuckKunai);
+
+        Stop();
+    }
+
+    /// <summary>
+    /// Stop input and the current kunai
+    /// </summary>
     internal void Stop()
     {
-        if(_trailRenderer!=null)
+        if (_trailRenderer != null)
             _trailRenderer.enabled = false;
 
         _isStuck = true;
@@ -246,14 +339,17 @@ public class KunaiController : MonoBehaviour, ISubject
         _charaController.enabled = false;
     }
 
-    internal void UpdateRotation(Vector3 direction)
-    {
-        transform.up = direction;
-    }
-    
+    #endregion
+
+    // ----------------- Teleportation ----------------- //
+    #region Teleportation
+    /// <summary>
+    /// Teleport the kunai from his current position to the target position
+    /// </summary>
+    /// <param name="position"> Target Position </param>
     internal void Teleport(Vector3 position)
     {
-        if(_trailRenderer != null)
+        if (_trailRenderer != null)
         {
             _trailRenderer.transform.SetParent(null);
             _trailRenderer.transform.position = transform.position;
@@ -265,21 +361,39 @@ public class KunaiController : MonoBehaviour, ISubject
         _charaController.enabled = false;
         transform.position = position;
     }
-    
-    internal void EditDirection(Vector3 direction)
+
+    /// <summary>
+    /// Calcul the position on the next portal with the offset
+    /// </summary>
+    /// <param name="contactHitPos"> Position hit by the kunai </param>
+    /// <param name="portalHit"> Transform of the portal hit by the kunai </param>
+    /// <param name="otherPortal"> The other portal </param>
+    /// <returns></returns>
+    internal Vector3 CalculPosiotionForNextPortal(Vector3 contactHitPos, Transform portalHit, Portal otherPortal)
     {
-        transform.up = direction;
+        Vector3 directionOffsetFromPortal = (portalHit.position - contactHitPos);
+        float dotForOtherPortal = Vector3.Dot(portalHit.right, directionOffsetFromPortal);
+
+        return otherPortal.transform.position + otherPortal.transform.right * dotForOtherPortal;
     }
 
+    /// <summary>
+    /// When the player has arrived to his new position after teleportation
+    /// </summary>
     internal void FinishTeleport()
     {
         _charaController.enabled = true;
         _trailRenderer = Instantiate(_prefabTrailRenderer, _transformTrailPosition.position, _transformTrailPosition.rotation, _transformTrailPosition);
     }
+    #endregion
 
+    // ----------------- Feedback Kunai Direction ----------------- //
     #region Feedback Kunai Direction
 
-    internal void UpdateDirectionFeedback(Vector3 direction)
+    /// <summary>
+    /// Update linerenderer feedback chen the player aim
+    /// </summary>
+    internal void UpdateDirectionFeedback()
     {
         _lineRenderer.SetPosition(0, transform.position);
 
@@ -293,11 +407,11 @@ public class KunaiController : MonoBehaviour, ISubject
             // PORTAL
             if (PortalLineFeedback(hit))
                 return;
-            
+
             // WOOD
             _lineRenderer.SetPosition(1, hit.point);
             _lineRenderer.SetPosition(2, hit.point);
-            
+
         }
         else
         {
@@ -305,6 +419,46 @@ public class KunaiController : MonoBehaviour, ISubject
             _lineRenderer.SetPosition(2, transform.position + transform.up * 10);
         }
     }
+
+    /// <summary>
+    /// Update the rotation of the kunai when he's not launch
+    /// </summary>
+    /// <param name="padPosition"> Input Position </param>
+    /// <param name="feedback"> True : Do feedback </param>
+    internal void UpdateKunaiRotation(Vector3? padPosition = null, bool feedback = true)
+    {
+        if (padPosition != null)
+            UpdateEndPositionInput((Vector3)padPosition);
+
+        // Calcul direction
+        Vector2 dir = (_startPositionInput - _endPositionInput).normalized;
+        _directionRotation.y = dir.x;
+        _directionRotation.z = dir.y;
+
+        // Update Kunai Direction
+        UpdateRotation(dir);
+
+        if (!feedback) return;
+
+        // Update Kunai Direction Feedback
+        UpdateDirectionFeedback();
+    }
+
+    /// <summary>
+    /// Update the position of the player on the screen
+    /// </summary>
+    /// <param name="padPosition"> position of the player on the screen </param>
+    private void UpdateEndPositionInput(Vector3 padPosition)
+    {
+        // Update User Position
+        _endPositionInput = padPosition;
+    }
+
+    /// <summary>
+    /// Update LineRenderer for feedback when the obstacle is metalic
+    /// </summary>
+    /// <param name="hit"> RaycastHitInfo of the obstacle touch whith the raycast </param>
+    /// <returns></returns>
     private bool RebondLineFeedback(RaycastHit hit)
     {
         if ((_rebondLayer.value & 1 << hit.collider.gameObject.layer) > 0)
@@ -334,6 +488,11 @@ public class KunaiController : MonoBehaviour, ISubject
         return false;
     }
 
+    /// <summary>
+    /// Update LineRenderer for feedback when the obstacle is a portal
+    /// </summary>
+    /// <param name="hit"> RaycastHitInfo of the obstacle touch whith the raycast </param>
+    /// <returns></returns>
     private bool PortalLineFeedback(RaycastHit hit)
     {
         if ((_portalLayer.value & 1 << hit.collider.gameObject.layer) > 0)
@@ -361,92 +520,19 @@ public class KunaiController : MonoBehaviour, ISubject
             return true;
         }
 
-        if(_lineRendererForPortal.enabled) HideLineRendererPortal();
+        if (_lineRendererForPortal.enabled) HideLineRendererPortal();
         return false;
     }
 
     #endregion
 
-    internal Vector3 CalculPosiotionForNextPortal(Vector3 contactHitPos, Transform portalHit, Portal otherPortal)
-    {
-        Vector3 directionOffsetFromPortal = (portalHit.position - contactHitPos);
-        float dotForOtherPortal = Vector3.Dot(portalHit.right, directionOffsetFromPortal);
+    // ----------------- Line Renderer For Feedback ----------------- //
+    #region Line Renderer For Feedback
 
-        return otherPortal.transform.position + otherPortal.transform.right * dotForOtherPortal;
-    }
 
-    internal void Launch()
-    {
-        _isStuck = false;
-        _hasBeenLaunched = true;
-
-        _charaController.enabled = true;
-
-        if (_trailRenderer != null)
-        {
-            _trailRenderer.enabled = true;
-            _trailRenderer.Clear();
-        }
-
-        _currentKunaiCount--;
-
-        HideLineRenderer();
-
-        NotifyObservers(_observersLaunchKunai);
-    }
-
-    internal void Respawn()
-    {
-        if (GameManager.Instance != null && GameManager.Instance.CheckAllBallonAreDestroy())
-            return;
-
-        if (_currentKunaiCount == 0)
-        {
-            GameManager.Instance.RestartLevel();
-            return;
-        }
-
-        if (_previousCollider != null)
-        {
-            _previousCollider.isTrigger = false;
-            _previousCollider = null;
-        }
-        
-        _charaController.enabled = false;
-
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
-
-        _hasBeenLaunched = false;
-
-        ShowLineRenderer();
-
-        _animator.Play(_hashRespawn);
-    }
-
-    internal void ClearMeshesInLevel()
-    {
-        foreach (GameObject go in _listMeshesInLevel)
-        {
-            Destroy(go);
-        }
-        _listMeshesInLevel.Clear();
-    }
-
-    internal void RestartLevel()
-    {
-        Stop(); 
-        ClearMeshesInLevel();
-        ResetCount();
-        Respawn();
-    }
-
-    internal void ResetCount()
-    {
-        _currentKunaiCount = 3;
-        NotifyObservers(_observersResetKunai);
-    }
-
+    /// <summary>
+    /// Disable / Hide all the line renderer used for the feedback before the throw
+    /// </summary>
     private void HideLineRenderer()
     {
         _lineRenderer.enabled = false;
@@ -456,6 +542,11 @@ public class KunaiController : MonoBehaviour, ISubject
 
         HideLineRendererPortal();
     }
+
+
+    /// <summary>
+    /// Disable / Hide only the line renderer used for the portal
+    /// </summary>
     private void HideLineRendererPortal()
     {
         _lineRendererForPortal.enabled = false;
@@ -463,6 +554,9 @@ public class KunaiController : MonoBehaviour, ISubject
         _lineRendererForPortal.SetPosition(1, Vector3.zero);
     }
     
+    /// <summary>
+    /// Enable / Show all the line renderer used for the feedback before the throw
+    /// </summary>
     private void ShowLineRenderer()
     {
         if(_lineRenderer.enabled) return;
@@ -470,18 +564,31 @@ public class KunaiController : MonoBehaviour, ISubject
 
         ShowLineRendererForPortal();
     }
+
+    /// <summary>
+    /// Enable / Show only the line renderer used for the portal
+    /// </summary>
     private void ShowLineRendererForPortal()
     {
         if(_lineRendererForPortal.enabled) return;
         _lineRendererForPortal.enabled = true;
     }
 
+    #endregion
 
-    private void NotifyObservers(List<EventObserver> listObservers)
+    // ----------------- Observers ----------------- //
+    #region Observers
+
+    /// <summary>
+    /// Notify all the observers in a IEnumerable
+    /// </summary>
+    /// <param name="observers"> The collection of observers to notify </param>
+    private void NotifyObservers(IEnumerable<EventObserver> observers)
     {
-        foreach(EventObserver observer in listObservers)
+        foreach(EventObserver observer in observers)
         {
             observer.Raise(this);
         }
     }
+    #endregion
 }
